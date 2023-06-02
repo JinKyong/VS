@@ -1,14 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-    public Player player;
+    public GameObject[] enemyPrefabs;
+    public Transform[] spawnPoint;
 
-    private void Awake()
+    private void Start()
     {
-        instance = this;
+        StartCoroutine(spawnEnemy());
+    }
+
+    IEnumerator spawnEnemy()
+    {
+        while (true)
+        {
+            GameObject em = PoolManager.Instance.Pop(enemyPrefabs[0], transform);
+            em.transform.position = spawnPoint[Random.Range(0, spawnPoint.Length)].position;
+
+            yield return new WaitForSeconds(Random.Range(3f, 8f));
+        }
     }
 }

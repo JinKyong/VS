@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
     Rigidbody2D body;
 
@@ -34,7 +33,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        body.MovePosition(body.position + inputVec * moveSpeed * Time.deltaTime);
+        body.MovePosition(body.position + inputVec * moveSpeed * Time.fixedDeltaTime);
     }
 
     void OnMove(InputValue value)
