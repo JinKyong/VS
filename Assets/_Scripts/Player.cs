@@ -6,24 +6,36 @@ using UnityEngine.InputSystem;
 public class Player : Singleton<Player>
 {
     Rigidbody2D body;
+    public Recognition recognition;
 
     Animator anim;
     SpriteRenderer spriteRenderer;
 
     public Vector2 inputVec;
-    [SerializeField]
-    float moveSpeed;
+    [SerializeField] float moveSpeed;
 
+    [SerializeField] Transform weaponTR;
     List<Weapon> weapons;
+
+    //[Space]
+    //[Header("Stat")]
+    int level;
+    int exp;
+    int maxExp;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        recognition = GetComponentInChildren<Recognition>();
 
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         weapons = new List<Weapon>();
+
+        level = 1;
+        exp = 0;
+        maxExp = 10;
     }
 
     private void LateUpdate()
@@ -44,10 +56,52 @@ public class Player : Singleton<Player>
         inputVec = context.ReadValue<Vector2>();
     }
 
-    public void AddWeapon()
+    private Weapon searchInven(Weapon weapon)
     {
-        //1. 있는 무기인지 체크
-            //1-1. 있는 거면 레베루업
-            //1-2. 없는 거면 새로 추가
+        foreach (var w in weapons)
+        {
+            if (w.GetType().Equals(weapon.GetType()))
+            {
+                return w;
+            }
+        }
+
+        return null;
+    }
+    public bool AddWeapon(Weapon weapon)
+    {
+        Weapon w = searchInven(weapon);
+
+        if (w is null)
+        {
+            weapon.transform.SetParent(weaponTR);
+            weapon.transform.localPosition = Vector2.zero;
+
+            weapons.Add(weapon);
+            weapon.Init();
+
+            return true;
+        }
+        else
+        {
+            w.Levelup();
+
+            return false;
+        }
+    }
+
+    public void GetExp(int value)
+    {
+        exp += value;
+        if(maxExp <= exp)
+        {
+            levelUp();
+            exp -= maxExp;
+        }
+    }
+    private void levelUp()
+    {
+        level++;
+        //ui켜서 하나 선택하기
     }
 }

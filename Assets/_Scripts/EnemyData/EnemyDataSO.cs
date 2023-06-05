@@ -8,6 +8,7 @@ public struct SEnemyData
     public RuntimeAnimatorController controller;
     public float speed;
     public int health;
+    public int expNum;
 }
 
 [CreateAssetMenu(fileName = "EnemyData",

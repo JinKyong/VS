@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     public EnemyDataSO enemyDatas;
     List<SEnemyData> dataList;
 
-    public GameObject enemyPrefab;
     public Transform[] spawnPoint;
+    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject[] ExpPrefabs;
 
     private void Start()
     {
+        PoolManager.Instance.Setup();
+
         dataList = enemyDatas.dataList;
         StartCoroutine(spawnEnemy());
     }
@@ -26,5 +29,10 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(Random.Range(1f, 3f));
         }
+    }
+    public void SpawnExp(int num, Vector3 pos)
+    {
+        GameObject exp = PoolManager.Instance.Pop(ExpPrefabs[num], transform);
+        exp.transform.position = pos;
     }
 }
