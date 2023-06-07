@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 
 public class Player : Singleton<Player>
@@ -17,25 +18,20 @@ public class Player : Singleton<Player>
     [SerializeField] Transform weaponTR;
     List<Weapon> weapons;
 
-    //[Space]
-    //[Header("Stat")]
-    int level;
-    int exp;
-    int maxExp;
+    [SerializeField] Slider HP_bar;
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        recognition = GetComponentInChildren<Recognition>();
+        recognition = GetComponent<Recognition>();
 
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         weapons = new List<Weapon>();
 
-        level = 1;
-        exp = 0;
-        maxExp = 10;
+        HP_bar.maxValue = 100f;
+        HP_bar.value = HP_bar.maxValue;
     }
 
     private void LateUpdate()
@@ -90,18 +86,8 @@ public class Player : Singleton<Player>
         }
     }
 
-    public void GetExp(int value)
+    public void Hurt(int value)
     {
-        exp += value;
-        if(maxExp <= exp)
-        {
-            levelUp();
-            exp -= maxExp;
-        }
-    }
-    private void levelUp()
-    {
-        level++;
-        //ui켜서 하나 선택하기
+        HP_bar.value -= value;
     }
 }

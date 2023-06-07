@@ -10,7 +10,7 @@ public class Exp : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<Player>().GetExp(value);
+            HUD.Instance.GetExp(value);
             PoolManager.Instance.Push(gameObject);
         }
     }

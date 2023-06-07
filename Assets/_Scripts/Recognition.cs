@@ -1,24 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Recognition : MonoBehaviour
 {
-    public List<Collider2D> targetList;
+    public float range;
+    public LayerMask targetLayer;
+    public RaycastHit2D[] targets;
+    //public Transform nearTarget;
 
-    private void Start()
+    private void FixedUpdate()
     {
-        targetList = new List<Collider2D>();
+        targets = Physics2D.CircleCastAll(transform.position, range, Vector2.zero, 0, targetLayer);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public Transform GetNearTarget()
     {
-        if (collision.CompareTag("Enemy"))
-            targetList.Add(collision);
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-            targetList.Remove(collision);
+        if (targets.Length <= 0) return null;
+
+        Array.Sort(targets, (x, y) => Vector2.Distance(transform.position, x.transform.position).CompareTo(
+            Vector2.Distance(transform.position, y.transform.position)));
+
+        return targets[0].transform;
     }
 }

@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public float moveSpeed;
     public int maxHealth;
     public int health;
+    public int damage;
     public int expNum;
 
     Vector2 direction;
@@ -30,8 +31,12 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         target = Player.Instance;
-        coll.enabled = true;
+
         onDead = false;
+        coll.enabled = true;
+        body.simulated = true;
+        spriteRenderer.sortingOrder = 0;
+        //anim.SetBool("Dead", false);
     }
 
     private void LateUpdate()
@@ -56,6 +61,7 @@ public class Enemy : MonoBehaviour
         moveSpeed = data.speed;
         maxHealth = data.health;
         health = data.health;
+        damage = data.damage;
         expNum = data.expNum;
     }
 
@@ -70,22 +76,30 @@ public class Enemy : MonoBehaviour
         {
             onDead = true;
             coll.enabled = false;
+            body.simulated = false;
+            spriteRenderer.sortingOrder = -1;
             anim.SetBool("Dead", true);
 
+            HUD.Instance.KillEnemy();
             GameManager.Instance.SpawnExp(expNum, transform.position);
-            Invoke("Dead", 2f);
         }
     }
     IEnumerator KnockBack(Vector2 dir)
     {
         yield return WFS;
-
-        if (!onDead)
-            body.AddForce(dir.normalized * 3f, ForceMode2D.Impulse);
+        
+        body.AddForce(dir.normalized * 3f, ForceMode2D.Impulse);
     }
-    private void Dead()
+    public void Dead()
     {
-        body.velocity = Vector2.zero;
         PoolManager.Instance.Push(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            collision.transform.GetComponent<Player>().Hurt(damage);
+        }
     }
 }

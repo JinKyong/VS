@@ -7,7 +7,6 @@ public abstract class Weapon : MonoBehaviour
     protected bool active = false;
 
     protected int level;
-    protected int maxLevel;
     public int Level { get { return level; } }
 
     [SerializeField]

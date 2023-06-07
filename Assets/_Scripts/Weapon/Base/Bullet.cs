@@ -25,6 +25,8 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!gameObject.activeSelf) return;
+
         if (collision.CompareTag("Enemy"))
         {
             PoolManager.Instance.Push(gameObject);

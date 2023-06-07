@@ -39,7 +39,7 @@ public class Reposition : MonoBehaviour
                 case "Enemy":
                     if (col.enabled)
                     {
-                        transform.Translate(playerDir * 30 + new Vector3(
+                        transform.Translate(playerDir * 40 + new Vector3(
                             Random.Range(-3f, 3f),
                             Random.Range(-3f, 3f),
                             0

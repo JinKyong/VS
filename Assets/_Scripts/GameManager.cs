@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager>
         {
             Enemy em = PoolManager.Instance.Pop(enemyPrefab, transform).GetComponent<Enemy>();
             em.transform.position = spawnPoint[Random.Range(0, spawnPoint.Length)].position;
-            em.Init(dataList[0]);
+            em.Init(dataList[1]);
 
             yield return new WaitForSeconds(Random.Range(1f, 3f));
         }
