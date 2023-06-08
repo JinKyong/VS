@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public EnemyDataSO enemyDatas;
-    List<SEnemyData> dataList;
-
-    public Transform[] spawnPoint;
+    [SerializeField] Transform[] spawnPoint;
+    [SerializeField] LevelData levelData;
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] GameObject[] ExpPrefabs;
+
+    int level;
+    float timer;
 
     private void Start()
     {
         PoolManager.Instance.Setup();
 
-        dataList = enemyDatas.dataList;
         StartCoroutine(spawnEnemy());
+
+        level = 0;
+        timer = 1800f;
+        HUD.Instance.UpdateTimer(timer);
+    }
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+        HUD.Instance.UpdateTimer(timer);
+
+        if (timer < levelData.levelRange[level]) gameLevelUP();
     }
 
     IEnumerator spawnEnemy()
@@ -25,7 +36,8 @@ public class GameManager : Singleton<GameManager>
         {
             Enemy em = PoolManager.Instance.Pop(enemyPrefab, transform).GetComponent<Enemy>();
             em.transform.position = spawnPoint[Random.Range(0, spawnPoint.Length)].position;
-            em.Init(dataList[1]);
+            em.Init(Random.Range(levelData.levels[level].min,
+                levelData.levels[level].max));
 
             yield return new WaitForSeconds(Random.Range(1f, 3f));
         }
@@ -34,5 +46,10 @@ public class GameManager : Singleton<GameManager>
     {
         GameObject exp = PoolManager.Instance.Pop(ExpPrefabs[num], transform);
         exp.transform.position = pos;
+    }
+
+    private void gameLevelUP()
+    {
+        level++;
     }
 }

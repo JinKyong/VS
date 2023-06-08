@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee8e926bf54f6e42bfe1e4bf38877a5, type: 3}
+  m_Name: Shovle
+  m_EditorClassIdentifier: 
+  weaponType: 1
+  weaponName: "\uC0BD"
+  weaponDesc: "\uACF5\uACA9 \uB370\uBBF8\uC9C0 {0} \uC99D\uAC00\n\uD22C\uC0AC\uCCB4
+    {1}\uAC1C \uC99D\uAC00"
+  weaponIcon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  damage: 14000000080000000a0000000a0000000c0000000f000000
+  counts:
+  - 1
+  - 0
+  - 0
+  - 1
+  - 0
+  - 1
+  weapon: {fileID: 1765497521784367088, guid: f2ea78840a461b146807b3d5bd08836a, type: 3}

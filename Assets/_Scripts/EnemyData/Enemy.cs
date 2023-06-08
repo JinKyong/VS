@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -8,12 +9,12 @@ public class Enemy : MonoBehaviour
     Collider2D coll;
     SpriteRenderer spriteRenderer;
 
-    public Animator anim;
-    public float moveSpeed;
-    public int maxHealth;
+    [SerializeField] EnemyDataSO dataSO;
+    List<SEnemyData> dataList;
+    int number;
+
+    [SerializeField] Animator anim;
     public int health;
-    public int damage;
-    public int expNum;
 
     Vector2 direction;
     bool onDead;
@@ -26,17 +27,15 @@ public class Enemy : MonoBehaviour
         coll = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        dataList = dataSO.dataList;
         WFS = new WaitForFixedUpdate();
     }
     private void OnEnable()
     {
-        target = Player.Instance;
-
         onDead = false;
         coll.enabled = true;
         body.simulated = true;
         spriteRenderer.sortingOrder = 0;
-        //anim.SetBool("Dead", false);
     }
 
     private void LateUpdate()
@@ -51,18 +50,17 @@ public class Enemy : MonoBehaviour
     {
         if (onDead || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
 
-        body.MovePosition(body.position + direction * moveSpeed * Time.fixedDeltaTime);
+        body.MovePosition(body.position + direction * dataList[number].speed * Time.fixedDeltaTime);
         body.velocity = Vector2.zero;
     }
 
-    public void Init(SEnemyData data)
+    public void Init(int num)
     {
-        anim.runtimeAnimatorController = data.controller;
-        moveSpeed = data.speed;
-        maxHealth = data.health;
-        health = data.health;
-        damage = data.damage;
-        expNum = data.expNum;
+        number = num;
+
+        target = Player.Instance;
+        anim.runtimeAnimatorController = dataList[number].controller;
+        health = dataList[number].health;
     }
 
 
@@ -81,7 +79,7 @@ public class Enemy : MonoBehaviour
             anim.SetBool("Dead", true);
 
             HUD.Instance.KillEnemy();
-            GameManager.Instance.SpawnExp(expNum, transform.position);
+            GameManager.Instance.SpawnExp(dataList[number].expNum, transform.position);
         }
     }
     IEnumerator KnockBack(Vector2 dir)
@@ -99,7 +97,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            collision.transform.GetComponent<Player>().Hurt(damage);
+            collision.transform.GetComponent<Player>().Hurt(dataList[number].damage);
         }
     }
 }

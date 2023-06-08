@@ -245,11 +245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922925d07cb43c147925b5c1e13b88b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataSO: {fileID: 11400000, guid: 567d2d82388788d42a1c108977007f44, type: 2}
   anim: {fileID: 1918320790659004739}
-  moveSpeed: 0
-  maxHealth: 0
   health: 0
-  expNum: 0
 --- !u!114 &1918320790659004743
 MonoBehaviour:
   m_ObjectHideFlags: 0

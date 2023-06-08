@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8043708111911796710}
   - component: {fileID: 192519944397342786}
   m_Layer: 0
-  m_Name: Exp 2
+  m_Name: Exp 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1294366765
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1997803578, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  m_Sprite: {fileID: 1807624531, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,4 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2f645be84670a4f93068d3e6bf99ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 10
+  expEvent: {fileID: 11400000, guid: 1e89440c171e3f24ebdf4a6effbc7f2f, type: 2}
+  expValue: {fileID: 11400000, guid: d1e55251620d5124680c58f559b6ee77, type: 2}
+  value: 5

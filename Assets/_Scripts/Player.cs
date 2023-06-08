@@ -15,10 +15,20 @@ public class Player : Singleton<Player>
     public Vector2 inputVec;
     [SerializeField] float moveSpeed;
 
-    [SerializeField] Transform weaponTR;
-    List<Weapon> weapons;
+    [Space]
+    [Header("PlayerLV")]
+    public int level;
+    [SerializeField] GameEvent levelEvent;
+    public int exp;
+    [SerializeField] int[] maxEXP;
+    public int MaxEXP { get { return maxEXP[level]; } }
+    [SerializeField] GameEvent expEvent;
 
-    [SerializeField] Slider HP_bar;
+    [Space]
+    [Header("PlayerHP")]
+    public int health;
+    [SerializeField] int maxHealth;
+    [SerializeField] GameEvent hurtEvent;
 
     void Start()
     {
@@ -27,11 +37,6 @@ public class Player : Singleton<Player>
 
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        weapons = new List<Weapon>();
-
-        HP_bar.maxValue = 100f;
-        HP_bar.value = HP_bar.maxValue;
     }
 
     private void LateUpdate()
@@ -52,42 +57,25 @@ public class Player : Singleton<Player>
         inputVec = context.ReadValue<Vector2>();
     }
 
-    private Weapon searchInven(Weapon weapon)
+    public void GetExp(int value)
     {
-        foreach (var w in weapons)
+        exp += value;
+        if(exp >= maxEXP[level])
         {
-            if (w.GetType().Equals(weapon.GetType()))
-            {
-                return w;
-            }
+            exp -= maxEXP[level];
+            LevelUP();
         }
 
-        return null;
+        expEvent.Raise();
     }
-    public bool AddWeapon(Weapon weapon)
+    public void LevelUP()
     {
-        Weapon w = searchInven(weapon);
-
-        if (w is null)
-        {
-            weapon.transform.SetParent(weaponTR);
-            weapon.transform.localPosition = Vector2.zero;
-
-            weapons.Add(weapon);
-            weapon.Init();
-
-            return true;
-        }
-        else
-        {
-            w.Levelup();
-
-            return false;
-        }
+        level++;
+        levelEvent.Raise();
     }
-
     public void Hurt(int value)
     {
-        HP_bar.value -= value;
+        health -= value;
+        hurtEvent.Raise();
     }
 }
