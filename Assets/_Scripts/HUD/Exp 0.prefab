@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 192519944397342786}
   m_Layer: 0
   m_Name: Exp 0
-  m_TagString: Untagged
+  m_TagString: EXP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,6 +124,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2f645be84670a4f93068d3e6bf99ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expEvent: {fileID: 11400000, guid: 1e89440c171e3f24ebdf4a6effbc7f2f, type: 2}
-  expValue: {fileID: 11400000, guid: d1e55251620d5124680c58f559b6ee77, type: 2}
   value: 1

@@ -10,6 +10,7 @@ public class GameEventListener : MonoBehaviour
     {
         Event.RegisterListener(this);
     }
+
     private void OnDisable()
     {
         Event.UnRegisterListener(this);

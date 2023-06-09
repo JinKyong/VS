@@ -9,25 +9,24 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] GameObject[] ExpPrefabs;
 
+    [SerializeField] FloatValue timer;
+    [SerializeField] GameEvent timerEvent;
     int level;
-    float timer;
 
     private void Start()
     {
         PoolManager.Instance.Setup();
-
         StartCoroutine(spawnEnemy());
 
         level = 0;
-        timer = 1800f;
-        HUD.Instance.UpdateTimer(timer);
+        timerEvent.Raise();
     }
     private void Update()
     {
-        timer -= Time.deltaTime;
-        HUD.Instance.UpdateTimer(timer);
+        timer.RuntimeValue -= Time.deltaTime;
+        timerEvent.Raise();
 
-        if (timer < levelData.levelRange[level]) gameLevelUP();
+        if (timer.RuntimeValue < levelData.levelRange[level]) gameLevelUP();
     }
 
     IEnumerator spawnEnemy()
@@ -36,10 +35,12 @@ public class GameManager : Singleton<GameManager>
         {
             Enemy em = PoolManager.Instance.Pop(enemyPrefab, transform).GetComponent<Enemy>();
             em.transform.position = spawnPoint[Random.Range(0, spawnPoint.Length)].position;
-            em.Init(Random.Range(levelData.levels[level].min,
-                levelData.levels[level].max));
+            em.Init(Random.Range(levelData.enemyRange[level].min,
+                levelData.enemyRange[level].max));
 
-            yield return new WaitForSeconds(Random.Range(1f, 3f));
+            yield return new WaitForSeconds(Random.Range(
+                levelData.spawnTerm[level].min,
+                levelData.spawnTerm[level].max));
         }
     }
     public void SpawnExp(int num, Vector3 pos)

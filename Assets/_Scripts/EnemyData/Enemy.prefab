@@ -248,6 +248,7 @@ MonoBehaviour:
   dataSO: {fileID: 11400000, guid: 567d2d82388788d42a1c108977007f44, type: 2}
   anim: {fileID: 1918320790659004739}
   health: 0
+  enemyDead: {fileID: 11400000, guid: 6110d9e5cf19bfb4a8ee01070f6136e7, type: 2}
 --- !u!114 &1918320790659004743
 MonoBehaviour:
   m_ObjectHideFlags: 0

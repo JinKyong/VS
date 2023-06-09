@@ -13,22 +13,18 @@ public class Player : Singleton<Player>
     SpriteRenderer spriteRenderer;
 
     public Vector2 inputVec;
-    [SerializeField] float moveSpeed;
+    [SerializeField] PlayerStat playerStat;
+    public PlayerStat Stat { get { return playerStat; } }
 
     [Space]
-    [Header("PlayerLV")]
-    public int level;
     [SerializeField] GameEvent levelEvent;
-    public int exp;
-    [SerializeField] int[] maxEXP;
-    public int MaxEXP { get { return maxEXP[level]; } }
     [SerializeField] GameEvent expEvent;
-
-    [Space]
-    [Header("PlayerHP")]
-    public int health;
-    [SerializeField] int maxHealth;
     [SerializeField] GameEvent hurtEvent;
+
+    private void Awake()
+    {
+        playerStat.Init();
+    }
 
     void Start()
     {
@@ -49,7 +45,7 @@ public class Player : Singleton<Player>
     }
     private void FixedUpdate()
     {
-        body.MovePosition(body.position + inputVec * moveSpeed * Time.fixedDeltaTime);
+        body.MovePosition(body.position + inputVec * playerStat.Speed * Time.fixedDeltaTime);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -59,10 +55,10 @@ public class Player : Singleton<Player>
 
     public void GetExp(int value)
     {
-        exp += value;
-        if(exp >= maxEXP[level])
+        playerStat.GetExp(value);
+        if(playerStat.exp >= playerStat.MaxEXP)
         {
-            exp -= maxEXP[level];
+            playerStat.exp -= playerStat.MaxEXP;
             LevelUP();
         }
 
@@ -70,12 +66,12 @@ public class Player : Singleton<Player>
     }
     public void LevelUP()
     {
-        level++;
+        playerStat.level++;
         levelEvent.Raise();
     }
     public void Hurt(int value)
     {
-        health -= value;
+        playerStat.health -= value;
         hurtEvent.Raise();
     }
 }

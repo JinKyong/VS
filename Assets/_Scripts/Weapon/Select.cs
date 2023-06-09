@@ -8,30 +8,50 @@ public class Select : MonoBehaviour
     [SerializeField] WeaponData data;
 
     [SerializeField] Image weaponIcon;
-    [SerializeField] Text weaponLevel;
     [SerializeField] Text weaponName;
+    [SerializeField] Text weaponLevel;
     [SerializeField] Text weaponDesc;
 
     int level;
 
     private void Start()
     {
-        level = 0;
-
         weaponIcon.sprite = data.weaponIcon;
-        weaponLevel.text = "Lv." + level;
         weaponName.text = data.weaponName;
-        weaponDesc.text = string.Format(data.weaponDesc,
-                     data.damage[level], data.counts[level]);
+
+        level = 0;
+        updateInfo();
     }
 
     public void SelectButton()
     {
         WeaponManager.Instance.AddWeapon(data, level);
 
-        level++;
+        if (level < data.damage.Length - 1)
+        {
+            level++;
+            updateInfo();
+        }
+    }
+
+    private void updateInfo()
+    {
         weaponLevel.text = "Lv." + level;
-        weaponDesc.text = string.Format(data.weaponDesc,
-                     data.damage[level], data.counts[level]);
+        switch (data.weaponType) 
+        {
+            case WeaponData.EWeaponType.Melee:
+            case WeaponData.EWeaponType.Range:
+                weaponDesc.text = string.Format(data.weaponDesc,
+                    data.damage[level], data.counts[level]);
+                break;
+            case WeaponData.EWeaponType.Gear:
+                weaponDesc.text = string.Format(data.weaponDesc,
+                    data.counts[level] * 100f);
+                break;
+            case WeaponData.EWeaponType.Potion:
+                break;
+            default:
+                break;
+        }
     }
 }

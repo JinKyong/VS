@@ -7,14 +7,11 @@ public class WeaponManager : Singleton<WeaponManager>
     [SerializeField] Transform weaponTR;
     List<Weapon> weapons;
 
-    public float defaultAttackSpeed;
-
     //List<Select> selects;
 
     private void Start()
     {
         weapons = new List<Weapon>();
-        defaultAttackSpeed = 1f;
     }
 
     private Weapon searchInven(WeaponData data)
@@ -36,11 +33,12 @@ public class WeaponManager : Singleton<WeaponManager>
         if (weapon is null)
         {
             weapon = Instantiate(data.weapon, weaponTR).GetComponent<Weapon>();
-            weapon.weaponName = data.weaponName;
+            weapon.Init(data);
             weapons.Add(weapon);
         }
-
-        weapon.damage += data.damage[level];
-        weapon.count += data.counts[level];
+        else
+        {
+            weapon.LevelUP(data, level);
+        }
     }
 }

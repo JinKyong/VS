@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Animator anim;
     public int health;
 
+    [SerializeField] GameEvent enemyDead;
     Vector2 direction;
     bool onDead;
     WaitForFixedUpdate WFS;
@@ -78,7 +79,7 @@ public class Enemy : MonoBehaviour
             spriteRenderer.sortingOrder = -1;
             anim.SetBool("Dead", true);
 
-            HUD.Instance.KillEnemy();
+            enemyDead.Raise();
             GameManager.Instance.SpawnExp(dataList[number].expNum, transform.position);
         }
     }

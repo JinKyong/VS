@@ -7,12 +7,12 @@ public class HPSlider : MonoBehaviour
 
     private void Start()
     {
-        hpSlider.maxValue = Player.Instance.health;
+        hpSlider.maxValue = Player.Instance.Stat.maxHealth;
         hpSlider.value = hpSlider.maxValue;
     }
 
     public void UpdateHP()
     {
-        hpSlider.value = Player.Instance.health;
+        hpSlider.value = Player.Instance.Stat.health;
     }
 }

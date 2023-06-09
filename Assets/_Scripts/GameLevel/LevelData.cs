@@ -11,7 +11,14 @@ public class LevelData : ScriptableObject
         public int min;
         public int max;
     }
+    [Serializable]
+    public struct SRangeF
+    {
+        public float min;
+        public float max;
+    }
 
-    public SRange[] levels;
+    public SRange[] enemyRange;
+    public SRangeF[] spawnTerm;
     public int[] levelRange;
 }

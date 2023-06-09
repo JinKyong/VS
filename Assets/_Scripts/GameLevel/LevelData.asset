@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba7d515167de2944a1a60818c320323, type: 3}
   m_Name: LevelData
   m_EditorClassIdentifier: 
-  levels:
+  enemyRange:
   - min: 0
     max: 1
   - min: 0
@@ -31,4 +31,23 @@ MonoBehaviour:
     max: 5
   - min: 4
     max: 5
-  levelRange: cc0600007206000018060000a00500002805000074040000c0030000d0020000
+  spawnTerm:
+  - min: 2
+    max: 2.5
+  - min: 1
+    max: 2
+  - min: 0.5
+    max: 1
+  - min: 0.3
+    max: 0.6
+  - min: 0.25
+    max: 0.5
+  - min: 0.2
+    max: 0.4
+  - min: 0.15
+    max: 0.3
+  - min: 0.15
+    max: 0.2
+  - min: 0.1
+    max: 0.15
+  levelRange: cc0600007206000018060000a00500002805000074040000c0030000d002000000000000
