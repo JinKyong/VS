@@ -6,7 +6,7 @@ using UnityEngine;
     menuName = "ScriptableObjects/WeaponData/BaseWeaponData")]
 public class WeaponData : ScriptableObject
 {
-    public enum EWeaponType { Melee, Range, Gear, Potion}
+    public enum EWeaponType { Melee, Range, Gear, Etc}
 
     [Header("Main Info")]
     public EWeaponType weaponType;

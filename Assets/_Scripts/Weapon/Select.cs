@@ -13,6 +13,7 @@ public class Select : MonoBehaviour
     [SerializeField] Text weaponDesc;
 
     int level;
+    public bool IsMaxLevel { get { return level == data.damage.Length; } }
 
     private void Start()
     {
@@ -26,29 +27,41 @@ public class Select : MonoBehaviour
     public void SelectButton()
     {
         WeaponManager.Instance.AddWeapon(data, level);
+        level++;
 
-        if (level < data.damage.Length - 1)
+        if (IsMaxLevel) WeaponManager.Instance.MaxLevelWeapon();
+        else updateInfo();
+    }
+    public void SelectButtonEtc()
+    {
+        if(data.weaponName == "포션")
         {
-            level++;
-            updateInfo();
+            Player.Instance.UpdateHP(30);
         }
+        else if(data.weaponName == "코인")
+        {
+
+        }
+
+        WeaponManager.Instance.DisableSelectWeapon();
     }
 
     private void updateInfo()
     {
-        weaponLevel.text = "Lv." + level;
         switch (data.weaponType) 
         {
             case WeaponData.EWeaponType.Melee:
             case WeaponData.EWeaponType.Range:
+                weaponLevel.text = "Lv." + level;
                 weaponDesc.text = string.Format(data.weaponDesc,
                     data.damage[level], data.counts[level]);
                 break;
             case WeaponData.EWeaponType.Gear:
+                weaponLevel.text = "Lv." + level;
                 weaponDesc.text = string.Format(data.weaponDesc,
                     data.counts[level] * 100f);
                 break;
-            case WeaponData.EWeaponType.Potion:
+            case WeaponData.EWeaponType.Etc:
                 break;
             default:
                 break;

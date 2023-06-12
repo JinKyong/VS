@@ -15,11 +15,13 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] Animator anim;
     public int health;
+    bool bAttack;
+    WaitForSeconds WFS;
 
     [SerializeField] GameEvent enemyDead;
     Vector2 direction;
     bool onDead;
-    WaitForFixedUpdate WFS;
+    WaitForFixedUpdate WFFU;
 
     // Start is called before the first frame update
     void Awake()
@@ -29,7 +31,8 @@ public class Enemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         dataList = dataSO.dataList;
-        WFS = new WaitForFixedUpdate();
+        WFS = new WaitForSeconds(1f);
+        WFFU = new WaitForFixedUpdate();
     }
     private void OnEnable()
     {
@@ -37,8 +40,8 @@ public class Enemy : MonoBehaviour
         coll.enabled = true;
         body.simulated = true;
         spriteRenderer.sortingOrder = 0;
+        bAttack = true;
     }
-
     private void LateUpdate()
     {
         if (onDead) return;
@@ -64,7 +67,6 @@ public class Enemy : MonoBehaviour
         health = dataList[number].health;
     }
 
-
     public void Hurt(int damage, Vector2 dir)
     {
         health -= damage;
@@ -85,7 +87,7 @@ public class Enemy : MonoBehaviour
     }
     IEnumerator KnockBack(Vector2 dir)
     {
-        yield return WFS;
+        yield return WFFU;
         
         body.AddForce(dir.normalized * 3f, ForceMode2D.Impulse);
     }
@@ -94,11 +96,18 @@ public class Enemy : MonoBehaviour
         PoolManager.Instance.Push(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player") && bAttack)
         {
-            collision.transform.GetComponent<Player>().Hurt(dataList[number].damage);
+            collision.transform.GetComponent<Player>().UpdateHP(dataList[number].damage);
+            StartCoroutine(Attack());
         }
+    }
+    IEnumerator Attack()
+    {
+        bAttack = false;
+        yield return WFS;
+        bAttack = true;
     }
 }

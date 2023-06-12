@@ -19,6 +19,7 @@ public class Player : Singleton<Player>
     [Space]
     [SerializeField] GameEvent levelEvent;
     [SerializeField] GameEvent expEvent;
+    [SerializeField] GameEvent healEvent;
     [SerializeField] GameEvent hurtEvent;
 
     private void Awake()
@@ -51,6 +52,7 @@ public class Player : Singleton<Player>
     public void OnMove(InputAction.CallbackContext context)
     {
         inputVec = context.ReadValue<Vector2>();
+        Debug.Log("Key Input");
     }
 
     public void GetExp(int value)
@@ -69,9 +71,11 @@ public class Player : Singleton<Player>
         playerStat.level++;
         levelEvent.Raise();
     }
-    public void Hurt(int value)
+    public void UpdateHP(int value)
     {
-        playerStat.health -= value;
-        hurtEvent.Raise();
+        playerStat.health += value;
+
+        if (value < 0) hurtEvent.Raise();
+        else healEvent.Raise();
     }
 }
