@@ -52,7 +52,6 @@ public class Player : Singleton<Player>
     public void OnMove(InputAction.CallbackContext context)
     {
         inputVec = context.ReadValue<Vector2>();
-        Debug.Log("Key Input");
     }
 
     public void GetExp(int value)
@@ -73,9 +72,11 @@ public class Player : Singleton<Player>
     }
     public void UpdateHP(int value)
     {
-        playerStat.health += value;
-
         if (value < 0) hurtEvent.Raise();
         else healEvent.Raise();
+
+        playerStat.health += value;
+        if (playerStat.health > playerStat.maxHealth) playerStat.health = playerStat.maxHealth;
+        else if (playerStat.health <= 0) GameManager.Instance.FinishGame(false);
     }
 }

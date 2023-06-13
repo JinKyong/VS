@@ -9,6 +9,7 @@ public class WeaponManager : Singleton<WeaponManager>
     bool bFirst;
 
     [SerializeField] Transform weaponTR;
+    [SerializeField] AudioSource selectSound;
     List<Weapon> weapons;
     int selectWeaponCount;
     int availableWeaponCount;
@@ -20,12 +21,12 @@ public class WeaponManager : Singleton<WeaponManager>
 
         weapons = new List<Weapon>();
         selectWeaponCount = 3;
-        availableWeaponCount = selectChildCount;
 
         for (int i = 0; i < selectChildCount; i++)
             selectTR.GetChild(i).gameObject.SetActive(false);
 
         selectChildCount -= 1;
+        availableWeaponCount = selectChildCount;
     }
 
     public void EnableSelectWeapon()
@@ -48,6 +49,7 @@ public class WeaponManager : Singleton<WeaponManager>
         else
         {
             int count = 0;
+            int infinity = 0;
             while (count < selectWeaponCount)
             {
                 int rand = Random.Range(0, selectChildCount);
@@ -58,12 +60,20 @@ public class WeaponManager : Singleton<WeaponManager>
                     select.gameObject.SetActive(true);
                     count++;
                 }
+
+                infinity++;
+                if(infinity > 1000)
+                {
+                    Debug.Log("무한루프");
+                    break;
+                }
             }
         }
     }
     public void DisableSelectWeapon()
     {
         Time.timeScale = 1f;
+        selectSound.Play();
         foreach (Transform tr in selectTR)
             tr.gameObject.SetActive(false);
     }

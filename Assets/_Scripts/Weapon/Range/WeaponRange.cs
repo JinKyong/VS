@@ -6,6 +6,7 @@ public class WeaponRange : Weapon
     [SerializeField] GameObject bullet;
     [SerializeField] float bulletSpeed;
     [SerializeField] float attackSpeed;
+    [SerializeField] AudioSource weaponSound;
 
     float coolTime = 0;
 
@@ -47,5 +48,7 @@ public class WeaponRange : Weapon
         else
             blt.Init(target.position - transform.position,
                 bulletSpeed, Player.Instance.Stat.Damage(damage));
+
+        weaponSound.Play();
     }
 }

@@ -15,7 +15,7 @@ public class Exp : MonoBehaviour
         bChase = true;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         moveSpeed = 6f;
         target = null;

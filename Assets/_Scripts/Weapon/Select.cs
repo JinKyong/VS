@@ -62,6 +62,7 @@ public class Select : MonoBehaviour
                     data.counts[level] * 100f);
                 break;
             case WeaponData.EWeaponType.Etc:
+                weaponDesc.text = data.weaponDesc;
                 break;
             default:
                 break;

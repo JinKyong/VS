@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc5d43dc53e4fa149b9f134f9a198bf2, type: 3}
-  m_Name: EnemyHurt
+  m_Name: GameFinish
   m_EditorClassIdentifier: 

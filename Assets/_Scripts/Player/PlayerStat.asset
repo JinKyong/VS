@@ -19,14 +19,14 @@ MonoBehaviour:
   iSpeedRatio: 1
   iAttackSpeedRatio: 1
   iExpRatio: 1
-  level: 2
+  level: 24
   exp: 0
-  maxEXP: 0100000003000000050000000a0000001400000023000000370000005000000078000000b4000000
+  maxEXP: 0100000003000000050000000a000000140000002300000037000000500000006f00000096000000
   maxHealth: 100
-  health: 95
+  health: 100
   damageRatio: 1
   speed: 3
-  speedRatio: 1
+  speedRatio: 1.5000001
   attackSpeed: 1
-  attackSpeedRatio: 1
+  attackSpeedRatio: 1.5000001
   expRatio: 1

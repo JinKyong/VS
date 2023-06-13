@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4091135246192792757}
   - component: {fileID: 8043708111911796710}
   - component: {fileID: 192519944397342786}
+  - component: {fileID: -9132602715081624251}
   m_Layer: 0
   m_Name: Exp 1
   m_TagString: EXP
@@ -125,3 +126,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 5
+--- !u!114 &-9132602715081624251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6842796793097682742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae7e95783c67d8479bc932e98d3c3f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

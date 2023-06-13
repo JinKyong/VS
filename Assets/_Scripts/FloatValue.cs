@@ -6,6 +6,7 @@ using UnityEngine;
 public class FloatValue : ScriptableObject, ISerializationCallbackReceiver
 {
     [SerializeField] float InitialValue;
+    public float IValue { get { return InitialValue; } }
 
     [NonSerialized]
     public float RuntimeValue;

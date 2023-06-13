@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
     WaitForSeconds WFS;
 
     [SerializeField] GameEvent enemyDead;
+    [SerializeField] AudioSource hurtAudio;
+    [SerializeField] AudioSource deadAudio;
+
     Vector2 direction;
     bool onDead;
     WaitForFixedUpdate WFFU;
@@ -70,8 +73,6 @@ public class Enemy : MonoBehaviour
     public void Hurt(int damage, Vector2 dir)
     {
         health -= damage;
-        anim.SetTrigger("Hit");
-        StartCoroutine(KnockBack(dir));
 
         if (health <= 0)
         {
@@ -81,8 +82,15 @@ public class Enemy : MonoBehaviour
             spriteRenderer.sortingOrder = -1;
             anim.SetBool("Dead", true);
 
+            deadAudio.Play();
             enemyDead.Raise();
             GameManager.Instance.SpawnExp(dataList[number].expNum, transform.position);
+        }
+        else
+        {
+            hurtAudio.Play();
+            anim.SetTrigger("Hit");
+            StartCoroutine(KnockBack(dir));
         }
     }
     IEnumerator KnockBack(Vector2 dir)
@@ -101,7 +109,7 @@ public class Enemy : MonoBehaviour
         if (collision.transform.CompareTag("Player") && bAttack)
         {
             collision.transform.GetComponent<Player>().UpdateHP(dataList[number].damage);
-            StartCoroutine(Attack());
+            if(gameObject.activeSelf) StartCoroutine(Attack());
         }
     }
     IEnumerator Attack()
