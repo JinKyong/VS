@@ -7,6 +7,7 @@ public class HUD : MonoBehaviour
 {
     [SerializeField] Text timerText;
     [SerializeField] Text killText;
+    [SerializeField] Text coinText;
     [SerializeField] FloatValue timer;
     [SerializeField] IntValue kill;
 
@@ -40,6 +41,10 @@ public class HUD : MonoBehaviour
     public void GetExp()
     {
         expSlider.value = Player.Instance.Stat.exp;
+    }
+    public void GetCoin()
+    {
+        coinText.text = Player.Instance.Stat.coin.ToString();
     }
     public void LevelUP()
     {

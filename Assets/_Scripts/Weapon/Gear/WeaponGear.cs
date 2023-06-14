@@ -6,6 +6,7 @@ public class WeaponGear : Weapon
         Damage,
         Speed,
         AttackSpeed,
+        Magnet,
         EXP,
     }
 
@@ -35,8 +36,8 @@ public class WeaponGear : Weapon
             case EGearType.AttackSpeed:
                 Player.Instance.Stat.attackSpeedRatio += value;
                 break;
-            case EGearType.EXP:
-                Player.Instance.Stat.speedRatio += value;
+            case EGearType.Magnet:
+                Player.Instance.Stat.magnetRatio += value;
                 break;
             default:
                 break;

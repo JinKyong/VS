@@ -21,6 +21,7 @@ public class ResultUI : MonoBehaviour
     [SerializeField] FloatValue timeValue;
     [SerializeField] Text levelText;
     [SerializeField] Text killText;
+    [SerializeField] Text coinText;
     [SerializeField] Text timeText;
 
     public void Finish()
@@ -30,8 +31,9 @@ public class ResultUI : MonoBehaviour
 
         resultImg.sprite = GameManager.Instance.IsClear ? clearSprite : overSprite;
 
-        levelText.text = $"Lv : {Player.Instance.Stat.level}";
+        levelText.text = $"Lv\t : {Player.Instance.Stat.level}";
         killText.text = $"Kill : {killValue.RuntimeValue}";
+        coinText.text = $"Coin : {Player.Instance.Stat.coin}";
 
         {
             if (timeValue.RuntimeValue < 0) timeValue.RuntimeValue = 0;

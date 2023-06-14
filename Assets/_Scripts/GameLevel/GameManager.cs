@@ -89,6 +89,12 @@ public class GameManager : Singleton<GameManager>
         else overSFX.Play();
 
         finishEvent.Raise();
+        
+        //Coin Save
+        int coin = PlayerPrefs.HasKey("Coin") ? PlayerPrefs.GetInt("Coin") : 0;
+        coin += Player.Instance.Stat.coin;
+        PlayerPrefs.SetInt("Coin", coin);
+        PlayerPrefs.Save();
     }
     public void RestartGame()
     {

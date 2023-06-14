@@ -16,8 +16,9 @@ MonoBehaviour:
   weaponName: "\uC2E0\uBC1C"
   weaponDesc: "\uC774\uB3D9\uC18D\uB3C4 {0}% \uC99D\uAC00"
   weaponIcon: {fileID: -966295699, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-  damage: 0000000000000000000000000000000000000000
+  damage: 000000000000000000000000000000000000000000000000
   counts:
+  - 0.1
   - 0.1
   - 0.1
   - 0.1

@@ -10,6 +10,7 @@ public class WeaponManager : Singleton<WeaponManager>
 
     [SerializeField] Transform weaponTR;
     [SerializeField] AudioSource selectSound;
+    [SerializeField] Inventory inventory;
     List<Weapon> weapons;
     int selectWeaponCount;
     int availableWeaponCount;
@@ -25,7 +26,7 @@ public class WeaponManager : Singleton<WeaponManager>
         for (int i = 0; i < selectChildCount; i++)
             selectTR.GetChild(i).gameObject.SetActive(false);
 
-        selectChildCount -= 1;
+        selectChildCount -= 2;
         availableWeaponCount = selectChildCount;
     }
 
@@ -35,6 +36,7 @@ public class WeaponManager : Singleton<WeaponManager>
 
         if (availableWeaponCount <= 0)
         {
+            selectTR.GetChild(selectTR.childCount - 2).gameObject.SetActive(true);
             selectTR.GetChild(selectTR.childCount - 1).gameObject.SetActive(true);
             return;
         }
@@ -105,10 +107,13 @@ public class WeaponManager : Singleton<WeaponManager>
             weapon = Instantiate(data.weapon, weaponTR).GetComponent<Weapon>();
             weapon.Init(data);
             weapons.Add(weapon);
+
+            inventory.AddItem(data);
         }
         else
         {
             weapon.LevelUP(data, level);
+            inventory.LevelUp(data, level);
         }
 
         DisableSelectWeapon();

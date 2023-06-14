@@ -10,22 +10,26 @@ public class PlayerStat : ScriptableObject
     [SerializeField] int iLevel;
     [SerializeField] int iExp;
     [SerializeField] int iHealth;
+    [SerializeField] int iCoin;
 
+    [Space]
+    [Header("Initial Ratio")]
     [SerializeField] float iDamageRatio; 
     [SerializeField] float iSpeedRatio;
     [SerializeField] float iAttackSpeedRatio;
-    [SerializeField] float iExpRatio;
+    [SerializeField] float iMagnetRatio;
 
     public void Init()
     {
         level = iLevel;
         exp = iExp;
+        coin = iCoin;
         health = maxHealth = iHealth;
 
         damageRatio = iDamageRatio;
         speedRatio = iSpeedRatio;
         attackSpeedRatio = iAttackSpeedRatio;
-        expRatio = iExpRatio;
+        magnetRatio = iMagnetRatio;
     }
 
     [Header("Level")]
@@ -41,6 +45,7 @@ public class PlayerStat : ScriptableObject
             else return maxEXP[maxEXP.Length - 1];
         }
     }
+    public int coin;
 
     [Space]
     [Header("HP")]
@@ -60,6 +65,7 @@ public class PlayerStat : ScriptableObject
     public float attackSpeedRatio;
     public float AttackSpeed(float value) { return value * (attackSpeed / attackSpeedRatio); }
 
-    public float expRatio;
-    public void GetExp(int value) => exp += (int)(value * expRatio);
+    [SerializeField] float magnetSize;
+    public float magnetRatio;
+    public float MagnetSize { get { return magnetSize * magnetRatio; } }
 }

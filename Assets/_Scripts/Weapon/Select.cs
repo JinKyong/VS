@@ -40,7 +40,7 @@ public class Select : MonoBehaviour
         }
         else if(data.weaponName == "ÄÚÀÎ")
         {
-
+            Player.Instance.GetCoin(50);
         }
 
         WeaponManager.Instance.DisableSelectWeapon();

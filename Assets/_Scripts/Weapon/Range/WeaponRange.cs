@@ -41,7 +41,7 @@ public class WeaponRange : Weapon
         Bullet blt = PoolManager.Instance.Pop(bullet).GetComponent<Bullet>();
         blt.transform.position = transform.position;
 
-        Transform target = Player.Instance.recognition.GetNearTarget();
+        Transform target = Player.Instance.GetNearTarget();
         if (target is null)
             blt.Init(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)),
                 bulletSpeed, Player.Instance.Stat.Damage(damage));

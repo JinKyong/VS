@@ -15,18 +15,21 @@ MonoBehaviour:
   iLevel: 0
   iExp: 0
   iHealth: 100
+  iCoin: 0
   iDamageRatio: 1
   iSpeedRatio: 1
   iAttackSpeedRatio: 1
-  iExpRatio: 1
-  level: 24
-  exp: 0
-  maxEXP: 0100000003000000050000000a000000140000002300000037000000500000006f00000096000000
+  iMagnetRatio: 1
+  level: 48
+  exp: 56
+  maxEXP: 01000000
+  coin: 400
   maxHealth: 100
   health: 100
   damageRatio: 1
   speed: 3
-  speedRatio: 1.5000001
+  speedRatio: 1.6000001
   attackSpeed: 1
-  attackSpeedRatio: 1.5000001
-  expRatio: 1
+  attackSpeedRatio: 1.6000001
+  magnetSize: 2
+  magnetRatio: 4

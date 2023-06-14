@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aee8e926bf54f6e42bfe1e4bf38877a5, type: 3}
-  m_Name: Glove
+  m_Name: Magnet
   m_EditorClassIdentifier: 
   weaponType: 2
-  weaponName: "\uC7A5\uAC11"
-  weaponDesc: "\uACF5\uACA9 \uC18D\uB3C4 {0}%\uC99D\uAC00"
-  weaponIcon: {fileID: -201829820, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  weaponName: "\uC790\uC11D"
+  weaponDesc: "\uD68D\uB4DD \uBC94\uC704 {0}%\uC99D\uAC00"
+  weaponIcon: {fileID: 21300000, guid: d38d1c1d7122405458f6be9f604246bb, type: 3}
   damage: 000000000000000000000000000000000000000000000000
   counts:
-  - 0.1
-  - 0.1
-  - 0.1
-  - 0.1
-  - 0.1
-  - 0.1
-  weapon: {fileID: 1765497521784367088, guid: f1a8f946810310a4bab7318811eb4770, type: 3}
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  weapon: {fileID: 1765497521784367088, guid: 49fd78b60aaaa0f4f9f8b6b333c3b835, type: 3}

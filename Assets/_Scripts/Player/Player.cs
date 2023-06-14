@@ -1,14 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 
 public class Player : Singleton<Player>
 {
     Rigidbody2D body;
-    public Recognition recognition;
-
     Animator anim;
     SpriteRenderer spriteRenderer;
 
@@ -17,8 +15,17 @@ public class Player : Singleton<Player>
     public PlayerStat Stat { get { return playerStat; } }
 
     [Space]
+    [Header("Recognition")]
+    [SerializeField] float recogRange;
+    [SerializeField] LayerMask targetLayer;
+    [SerializeField] RaycastHit2D[] targets;
+    [SerializeField] LayerMask expLayer;
+
+    [Space]
+    [Header("Event")]
     [SerializeField] GameEvent levelEvent;
     [SerializeField] GameEvent expEvent;
+    [SerializeField] GameEvent coinEvent;
     [SerializeField] GameEvent healEvent;
     [SerializeField] GameEvent hurtEvent;
 
@@ -30,8 +37,6 @@ public class Player : Singleton<Player>
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        recognition = GetComponent<Recognition>();
-
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -47,6 +52,23 @@ public class Player : Singleton<Player>
     private void FixedUpdate()
     {
         body.MovePosition(body.position + inputVec * playerStat.Speed * Time.fixedDeltaTime);
+
+        //Enemy Search
+        targets = Physics2D.CircleCastAll(transform.position, recogRange, Vector2.zero, 0, targetLayer);
+        //Exp Search
+        var colls = Physics2D.OverlapBoxAll(transform.position, 
+            new Vector2(Stat.MagnetSize, Stat.MagnetSize), 0, expLayer);
+        foreach(var c in colls)
+            c.GetComponent<Exp>().OnTarget();
+    }
+    public Transform GetNearTarget()
+    {
+        if (targets.Length <= 0) return null;
+
+        Array.Sort(targets, (x, y) => Vector2.Distance(transform.position, x.transform.position).CompareTo(
+            Vector2.Distance(transform.position, y.transform.position)));
+
+        return targets[0].transform;
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -56,7 +78,7 @@ public class Player : Singleton<Player>
 
     public void GetExp(int value)
     {
-        playerStat.GetExp(value);
+        playerStat.exp += value;
         if(playerStat.exp >= playerStat.MaxEXP)
         {
             playerStat.exp -= playerStat.MaxEXP;
@@ -64,6 +86,11 @@ public class Player : Singleton<Player>
         }
 
         expEvent.Raise();
+    }
+    public void GetCoin(int value)
+    {
+        playerStat.coin += value;
+        coinEvent.Raise();
     }
     public void LevelUP()
     {
