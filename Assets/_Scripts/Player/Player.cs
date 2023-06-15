@@ -31,7 +31,7 @@ public class Player : Singleton<Player>
 
     private void Awake()
     {
-        playerStat.Init();
+        playerStat.GameStart();
     }
 
     void Start()

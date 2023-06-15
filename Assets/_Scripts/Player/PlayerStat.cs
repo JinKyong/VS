@@ -15,21 +15,33 @@ public class PlayerStat : ScriptableObject
     [Space]
     [Header("Initial Ratio")]
     [SerializeField] float iDamageRatio; 
-    [SerializeField] float iSpeedRatio;
     [SerializeField] float iAttackSpeedRatio;
+    [SerializeField] float iSpeedRatio;
     [SerializeField] float iMagnetRatio;
 
+    [Space]
+    [Header("Upgrade")]
+    [SerializeField] public int UHealth;
+    [SerializeField] public float UDamageRatio;
+    [SerializeField] public float UAttackSpeedRatio;
+    [SerializeField] public float USpeedRatio;
+    [SerializeField] public float UMagnetRatio;
+
     public void Init()
+    {
+        totalCoin = PlayerPrefs.HasKey("TotalCoin") ? PlayerPrefs.GetInt("TotalCoin") : 0;
+    }
+    public void GameStart()
     {
         level = iLevel;
         exp = iExp;
         coin = iCoin;
-        health = maxHealth = iHealth;
+        health = maxHealth = iHealth + UHealth;
 
-        damageRatio = iDamageRatio;
-        speedRatio = iSpeedRatio;
-        attackSpeedRatio = iAttackSpeedRatio;
-        magnetRatio = iMagnetRatio;
+        damageRatio = iDamageRatio + UDamageRatio;
+        speedRatio = iSpeedRatio + USpeedRatio;
+        attackSpeedRatio = iAttackSpeedRatio + UAttackSpeedRatio;
+        magnetRatio = iMagnetRatio + UMagnetRatio;
     }
 
     [Header("Level")]
@@ -46,6 +58,7 @@ public class PlayerStat : ScriptableObject
         }
     }
     public int coin;
+    public int totalCoin;
 
     [Space]
     [Header("HP")]

@@ -7,9 +7,12 @@ namespace StartScene
 {
     public class GameManagerStart : MonoBehaviour
     {
+        [SerializeField] PlayerStat stat;
+
         private void Start()
         {
             Time.timeScale = 1f;
+            stat.Init();
         }
 
         public void GameStart()

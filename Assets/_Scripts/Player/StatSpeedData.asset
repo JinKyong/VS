@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6106510d6588a944eb391f591c820473, type: 3}
-  m_Name: TimerValue
+  m_Script: {fileID: 11500000, guid: 753afb3c73901bb47b6d7ebdb7261c2a, type: 3}
+  m_Name: StatSpeedData
   m_EditorClassIdentifier: 
-  InitialValue: 1800
+  type: 3
+  icon: {fileID: 21300000, guid: 7f7b357cf57e0164ab611c242302cc68, type: 3}
+  maxLevel: 5
+  value: 0.08
+  cost: 1000

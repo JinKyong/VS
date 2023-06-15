@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6106510d6588a944eb391f591c820473, type: 3}
-  m_Name: TimerValue
+  m_Script: {fileID: 11500000, guid: 753afb3c73901bb47b6d7ebdb7261c2a, type: 3}
+  m_Name: StatMagnetData
   m_EditorClassIdentifier: 
-  InitialValue: 1800
+  type: 4
+  icon: {fileID: 1997828774, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  maxLevel: 2
+  value: 0.5
+  cost: 10000

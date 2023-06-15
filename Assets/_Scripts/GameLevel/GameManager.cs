@@ -91,9 +91,9 @@ public class GameManager : Singleton<GameManager>
         finishEvent.Raise();
         
         //Coin Save
-        int coin = PlayerPrefs.HasKey("Coin") ? PlayerPrefs.GetInt("Coin") : 0;
+        int coin = PlayerPrefs.HasKey("TotalCoin") ? PlayerPrefs.GetInt("TotalCoin") : 0;
         coin += Player.Instance.Stat.coin;
-        PlayerPrefs.SetInt("Coin", coin);
+        PlayerPrefs.SetInt("TotalCoin", coin);
         PlayerPrefs.Save();
     }
     public void RestartGame()
