@@ -3,7 +3,7 @@ using UnityEngine;
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     // Check to see if we're about to be destroyed
-    private static bool shutDown = false;
+    //private static bool shutDown = false;
     private static T instance;
 
     /// <summary>
@@ -47,11 +47,11 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        shutDown = true;
+        //shutDown = true;
     }
 
     private void OnDestroy()
     {
-        shutDown = true;
+        //shutDown = true;
     }
 }

@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753afb3c73901bb47b6d7ebdb7261c2a, type: 3}
   m_Name: StatHealthData
   m_EditorClassIdentifier: 
+  type: 0
   icon: {fileID: -1651719840, guid: b288df52789c0fd4094e12bb3c30deec, type: 3}
+  statName: "\uCD5C\uB300\uCCB4\uB825"
   maxLevel: 5
   value: 20
   cost: 250

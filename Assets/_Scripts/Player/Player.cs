@@ -41,6 +41,14 @@ public class Player : Singleton<Player>
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    private void Update()
+    {
+        //체력 리젠
+        if(playerStat.health < playerStat.maxHealth && playerStat.healthRegen > 0)
+        {
+            UpdateHP(playerStat.healthRegen * Time.deltaTime);
+        }
+    }
     private void LateUpdate()
     {
         if (inputVec.x != 0)
@@ -63,6 +71,7 @@ public class Player : Singleton<Player>
     }
     public Transform GetNearTarget()
     {
+        //감지된 타겟중 가장 가까운 타겟 하나 반환
         if (targets.Length <= 0) return null;
 
         Array.Sort(targets, (x, y) => Vector2.Distance(transform.position, x.transform.position).CompareTo(
@@ -97,13 +106,13 @@ public class Player : Singleton<Player>
         playerStat.level++;
         levelEvent.Raise();
     }
-    public void UpdateHP(int value)
+    public void UpdateHP(float value)
     {
-        if (value < 0) hurtEvent.Raise();
-        else healEvent.Raise();
-
         playerStat.health += value;
         if (playerStat.health > playerStat.maxHealth) playerStat.health = playerStat.maxHealth;
         else if (playerStat.health <= 0) GameManager.Instance.FinishGame(false);
+
+        if (value < 0) hurtEvent.Raise();
+        else healEvent.Raise();
     }
 }

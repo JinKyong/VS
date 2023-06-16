@@ -49,8 +49,8 @@ MonoBehaviour:
   damage: 0
   count: 0
   bullet: {fileID: 8004379202831207465, guid: 1a482147b97b6eb40b637e8def3b84ce, type: 3}
-  bulletSpeed: 4
-  attackSpeed: 2
+  bulletSpeed: 5.5
+  attackSpeed: 1.8
   weaponSound: {fileID: 5543482365797560057}
 --- !u!82 &5543482365797560057
 AudioSource:

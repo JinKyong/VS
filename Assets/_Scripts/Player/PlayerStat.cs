@@ -9,23 +9,25 @@ public class PlayerStat : ScriptableObject
     [Header("Initial Value")]
     [SerializeField] int iLevel;
     [SerializeField] int iExp;
-    [SerializeField] int iHealth;
+    [SerializeField] float iHealth;
+    [SerializeField] float iHealthRegen;
     [SerializeField] int iCoin;
 
     [Space]
     [Header("Initial Ratio")]
+    [SerializeField] float iMagnetRatio;
     [SerializeField] float iDamageRatio; 
     [SerializeField] float iAttackSpeedRatio;
     [SerializeField] float iSpeedRatio;
-    [SerializeField] float iMagnetRatio;
 
     [Space]
     [Header("Upgrade")]
-    [SerializeField] public int UHealth;
+    [SerializeField] public float UHealth;
+    [SerializeField] public float UHealthRegen;
+    [SerializeField] public float UMagnetRatio;
     [SerializeField] public float UDamageRatio;
     [SerializeField] public float UAttackSpeedRatio;
     [SerializeField] public float USpeedRatio;
-    [SerializeField] public float UMagnetRatio;
 
     public void Init()
     {
@@ -37,11 +39,12 @@ public class PlayerStat : ScriptableObject
         exp = iExp;
         coin = iCoin;
         health = maxHealth = iHealth + UHealth;
+        healthRegen = iHealthRegen + UHealthRegen;
 
+        magnetRatio = iMagnetRatio + UMagnetRatio;
         damageRatio = iDamageRatio + UDamageRatio;
         speedRatio = iSpeedRatio + USpeedRatio;
         attackSpeedRatio = iAttackSpeedRatio + UAttackSpeedRatio;
-        magnetRatio = iMagnetRatio + UMagnetRatio;
     }
 
     [Header("Level")]
@@ -62,11 +65,16 @@ public class PlayerStat : ScriptableObject
 
     [Space]
     [Header("HP")]
-    public int maxHealth;
-    public int health;
+    public float maxHealth;
+    public float health;
+    public float healthRegen;
 
     [Space]
     [Header("Stat")]
+    [SerializeField] float magnetSize;
+    public float magnetRatio;
+    public float MagnetSize { get { return magnetSize * magnetRatio; } }
+
     public float damageRatio;
     public int Damage(int value) { return (int)(value * damageRatio); }
 
@@ -77,8 +85,4 @@ public class PlayerStat : ScriptableObject
     [SerializeField] float attackSpeed;
     public float attackSpeedRatio;
     public float AttackSpeed(float value) { return value * (attackSpeed / attackSpeedRatio); }
-
-    [SerializeField] float magnetSize;
-    public float magnetRatio;
-    public float MagnetSize { get { return magnetSize * magnetRatio; } }
 }

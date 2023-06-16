@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   icon: {fileID: 36784330, guid: b288df52789c0fd4094e12bb3c30deec, type: 3}
+  statName: "\uACF5\uACA9\uB825"
   maxLevel: 4
   value: 0.25
   cost: 2000

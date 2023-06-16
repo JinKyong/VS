@@ -19,6 +19,7 @@ public class StatUpgradeBtn : MonoBehaviour
     [Header("Component")]
     Button btn;
     [SerializeField] Image icon;
+    [SerializeField] Text nameText;
     [SerializeField] Transform levelTR;
     [SerializeField] Text costText;
     int cost;
@@ -30,6 +31,7 @@ public class StatUpgradeBtn : MonoBehaviour
         btn = GetComponent<Button>();
 
         icon.sprite = data.icon;
+        nameText.text = data.statName;
         for (int i = 0; i < data.maxLevel; i++)
             levelTR.GetChild(i).gameObject.SetActive(true);
 
@@ -94,7 +96,13 @@ public class StatUpgradeBtn : MonoBehaviour
         switch (data.type)
         {
             case StatData.EStatDataType.Health:
-                stat.UHealth = (int)data.value * level;
+                stat.UHealth = data.value * level;
+                break;
+            case StatData.EStatDataType.HealthRegen:
+                stat.UHealthRegen = data.value * level;
+                break;
+            case StatData.EStatDataType.Magent:
+                stat.UMagnetRatio = data.value * level;
                 break;
             case StatData.EStatDataType.Damage:
                 stat.UDamageRatio = data.value * level;
@@ -104,9 +112,6 @@ public class StatUpgradeBtn : MonoBehaviour
                 break;
             case StatData.EStatDataType.Speed:
                 stat.USpeedRatio = data.value * level;
-                break;
-            case StatData.EStatDataType.Magent:
-                stat.UMagnetRatio = data.value * level;
                 break;
             default:
                 break;

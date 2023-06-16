@@ -51,7 +51,6 @@ public class WeaponManager : Singleton<WeaponManager>
         else
         {
             int count = 0;
-            int infinity = 0;
             while (count < selectWeaponCount)
             {
                 int rand = Random.Range(0, selectChildCount);
@@ -61,13 +60,6 @@ public class WeaponManager : Singleton<WeaponManager>
                 {
                     select.gameObject.SetActive(true);
                     count++;
-                }
-
-                infinity++;
-                if(infinity > 1000)
-                {
-                    Debug.Log("무한루프");
-                    break;
                 }
             }
         }
@@ -100,16 +92,19 @@ public class WeaponManager : Singleton<WeaponManager>
     }
     public void AddWeapon(WeaponData data, int level)
     {
+        //1. 인벤에 이미 있는 무기인지 확인
         Weapon weapon = searchInven(data);
 
+        //1-1. 없는 무기면 새로 생성해서 추가
         if (weapon is null)
         {
             weapon = Instantiate(data.weapon, weaponTR).GetComponent<Weapon>();
             weapon.Init(data);
-            weapons.Add(weapon);
 
+            weapons.Add(weapon);
             inventory.AddItem(data);
         }
+        //1-2. 있는 무기면 해당 무기 레벨업
         else
         {
             weapon.LevelUP(data, level);

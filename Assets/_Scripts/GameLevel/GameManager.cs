@@ -33,6 +33,7 @@ public class GameManager : Singleton<GameManager>
         spawnRoutine = StartCoroutine(spawnEnemy());
 
         level = 0;
+        //타이머 초기화
         timer.OnAfterDeserialize();
         timerEvent.Raise();
         bStart = true;
@@ -45,7 +46,6 @@ public class GameManager : Singleton<GameManager>
             timerEvent.Raise();
 
             if (timer.RuntimeValue < levelData.levelRange[level]) gameLevelUP();
-
             if (timer.RuntimeValue <= 0) FinishGame(true);
         }
     }
@@ -77,6 +77,8 @@ public class GameManager : Singleton<GameManager>
 
     public void FinishGame(bool isClear)
     {
+        if (!bStart) return;
+
         bStart = false;
         IsClear = isClear;
 
