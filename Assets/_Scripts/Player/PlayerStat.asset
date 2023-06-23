@@ -23,22 +23,22 @@ MonoBehaviour:
   iSpeedRatio: 1
   UHealth: 40
   UHealthRegen: 0.2
-  UMagnetRatio: 0
-  UDamageRatio: 0
+  UMagnetRatio: 0.08
+  UDamageRatio: 0.08
   UAttackSpeedRatio: 0
   USpeedRatio: 0
-  level: 52
-  exp: 196
-  maxEXP: 0100000003000000060000000a0000000f000000150000001f0000002c0000003e000000540000006e00000096000000c8000000040100004a0100009a010000f40100006c02000020030000e8030000
-  coin: 550
-  totalCoin: 4349700
+  level: 19
+  exp: 226
+  maxEXP: 0100000003000000060000000a0000000f000000150000001f0000002c0000003e000000540000006e0000008c000000aa000000c8000000e60000000401000022010000400100005e0100007c0100009a010000c2010000ea010000120200003a020000620200008a020000b2020000da020000020300002a03000084030000e8030000
+  coin: 0
+  totalCoin: 650
   maxHealth: 140
-  health: -2.111134
+  health: -0.8600361
   healthRegen: 0.2
   magnetSize: 2
-  magnetRatio: 4
-  damageRatio: 1
+  magnetRatio: 1.58
+  damageRatio: 1.08
   speed: 3
-  speedRatio: 1.6000001
+  speedRatio: 1.1
   attackSpeed: 1
-  attackSpeedRatio: 1.6000001
+  attackSpeedRatio: 1.1
