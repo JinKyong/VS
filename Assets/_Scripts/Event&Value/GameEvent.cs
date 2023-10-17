@@ -13,6 +13,12 @@ public class GameEvent : ScriptableObject
             listener.OnEventRaised();
     }
 
+    public void ConfirmListener()
+    {
+        foreach (var listener in listeners)
+            Debug.Log(listener.name);
+    }
+
     public void RegisterListener(GameEventListener listener)
     {
         listeners.Add(listener);
